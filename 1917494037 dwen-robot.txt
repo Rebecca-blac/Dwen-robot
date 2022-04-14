@@ -1,0 +1,55 @@
+2.
+Write user documentation
+1.Dwen-robot is a simple, flexible intelligent voice system designed to quickly build personalized smart speakers.
+2.Docker installation:
+Docker image installation is more suitable for Linux systems. For Windows and Mac, due to the different underlying audio drivers, offline wake-up and voice playback functions cannot be implemented. However, text or recording interaction is still available in the background.
+X86-64 architecture devices:
+First make sure docker is installed.
+If your device is a generic x86-64 architecture device (such as a PC or Mac), you can use wzpan/ Dwen-Robot images.
+For Linux, you can bridge /dev/snd to Docker to enable sound card support.
+For Mac and Windows, you can only forgo sound card support.
+Therefore, manual installation is recommended for the Mac system. For Windows, you can refer to the one-click automatic installation script in other installation methods.
+Once docker Run is complete, you can start Dwen-Robot by referring to the Running section.
+ARM device:
+If your device is an ARM architecture device (e.g. Raspberry Pi 3B), you can use wzpan/ Dwen-robot-ARM image (note Pi Zero is armV6L architecture, so docker installation is not supported, please use manual installation).
+Then run the following command to start the Docker image.
+Once docker Run is complete, you can start Dwen-Robot by referring to the Running section.
+3.Check and set up sound card before running.
+Mac system:
+The configuration of the Mac system is relatively simple. You can adjust the input and output in system Preferences → Sound.
+After tuning, you can test the recording.
+Linux system:
+For Linux, it is often necessary to set up the sound card. Configuring the microphone and stereo is one of the most difficult parts of Dwen-Robot for new users on Linux.
+Dwen was - robot operation:
+The first startup will prompt you to create a configuration file in the user directory by typing y.
+Then Dwen-Robot is awakened by the wakeup word "snowboy" for interaction (the wakeup word can be customized, see update wakeup word to improve the success rate and accuracy).
+4.No module named _snowboydetect:
+A: You need to make sure there are two things:
+Use Python 3 to execute this program;
+Make sure you use the _Snowboydetect. so package available to the platform. It is recommended that you compile one yourself.
+When the music is playing, there is no sound.
+A: You will need to install the SOX decoder library for MP3.
+5.The following warnings are encountered during use:
+statistic not specified in profile, defa
+As Dwen-Robot iterations continue, new configuration items will inevitably be added. The user's own configuration items have been written to a local file, and the update program cannot directly obtain and modify the user's local configuration. For backward compatibility, the default value is used for some new configuration items. But it was missing, so Dwen-Robot issued this warning.
+The solution is to add this configuration to the configuration file (~/.Dwen/config.yml) to eliminate warnings.
+
+
+3. Developer documentation
+1.You can obtain the source code on the github repository.
+2.You can create the directory structure for your static layout and other resources, such as images and styles, inside this folder but keep the location of the static layout file intact.
+3.First make sure docker is installed.
+If your device is a generic x86-64 architecture device (such as a PC or Mac), you can use wzpan/ Dwen-Robot images.
+Equipment requirements
+Dwen-robot supports the following devices and systems:
+64bit Mac OS X
+64bit Ubuntu (12.04 and 14.04)
+A full range of Raspbian systems
+Pine 64 with Debian Jessie 8.5 (3.10.102)
+Intel Edison with Ubilinux (Debian Wheezy 7.8)
+Windows Subsystem for Linux (WSL)
+4.The first startup will prompt you to create a configuration file in the user directory by typing y.
+Then Dwen-Robot is awakened by the wakeup word "snowboy" for interaction (the wakeup word can be customized, see update wakeup word to improve the success rate and accuracy).
+5.Refer to the comments in the configuration file for configuration. Notice You are not advised to modify the content in default.yml directly. Otherwise, subsequent updates may cause trouble. You should either make a copy of it and put it in, or follow the instructions while running and ask Dwen-Robot to do it for you.
+git pull$HOME/.Dwen/config.yml
+6.Developers should update the version number before calling the build system. After building a release, developers should perform health checks.
